@@ -9,6 +9,8 @@ export const GT = 'GT';
 export const EQ = 'EQ';
 export const AND = 'AND';
 export const OR = 'OR';
+export const JUMP = 'JUMP';
+export const JUMPI = 'JUMPI';
 
 export const getValues = (state: any) => {
     return {

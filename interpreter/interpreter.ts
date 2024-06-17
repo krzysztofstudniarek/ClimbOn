@@ -3,9 +3,10 @@ import { handleAnd } from "./operations/and";
 import { handleDiv } from "./operations/div";
 import { handleEq } from "./operations/equals";
 import { handleGt } from "./operations/greaterThan";
+import { handleJump, handleJumpI } from "./operations/jump";
 import { handleLt } from "./operations/lessThan";
 import { handleMul } from "./operations/mul";
-import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND, OR } from "./operations/opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND, OR, JUMP, JUMPI } from "./operations/opCodes";
 import { handleOr } from "./operations/or";
 import { handlePush } from "./operations/push";
 import { handleStop } from "./operations/stop";
@@ -26,7 +27,9 @@ export class Interpreter {
         [GT, handleGt],
         [EQ, handleEq],
         [AND, handleAnd],
-        [OR, handleOr]
+        [OR, handleOr],
+        [JUMP, handleJump],
+        [JUMPI, handleJumpI],
     ]);
     
     constructor() {
