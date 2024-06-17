@@ -6,3 +6,4 @@ export const MUL = 'MUL';
 export const DIV = 'DIV';
 export const LT = 'LT';
 export const GT = 'GT';
+export const EQ = 'EQ';
