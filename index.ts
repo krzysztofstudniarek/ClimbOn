@@ -1,4 +1,4 @@
-import { PUSH, ADD, SUB, MUL, DIV, STOP } from "./interpreter/opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP } from "./interpreter/operations/opCodes";
 import { Interpreter} from "./interpreter/interpreter";
 
 const code = [PUSH, 2, PUSH, 3, MUL, PUSH, 5, ADD, PUSH, 11, SUB, STOP]; //expected res 0

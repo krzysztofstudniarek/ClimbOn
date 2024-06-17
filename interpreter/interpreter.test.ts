@@ -1,5 +1,5 @@
 import { Interpreter } from "./interpreter";
-import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND, OR } from "./opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND, OR } from "./operations/opCodes";
 
 test(`Test PUSH`, () => {
     expect(new Interpreter().runCode([PUSH, 2, STOP])).toBe(2);
