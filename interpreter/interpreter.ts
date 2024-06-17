@@ -1,4 +1,4 @@
-import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT } from "./opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND } from "./opCodes";
 
 export class Interpreter {
 
@@ -13,7 +13,8 @@ export class Interpreter {
         [STOP, this.handleStop],
         [LT, this.handleLt],
         [GT, this.handleGt],
-        ['EQ', this.handleEq],
+        [EQ, this.handleEq],
+        [AND, this.handleAnd]
     ]);
     
     constructor() {
@@ -96,5 +97,11 @@ export class Interpreter {
         const {a, b} = this.getValues();
         console.log(`LT ${a} === ${b} = ${a === b}`);
         this.state.stack.push(a === b ? 1 : 0);
+    }
+
+    private handleAnd() {
+        const {a, b} = this.getValues();
+        console.log(`AND ${a} && ${b} = ${a && b}`);
+        this.state.stack.push(a && b);
     }
 }

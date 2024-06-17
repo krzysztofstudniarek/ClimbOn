@@ -1,5 +1,5 @@
 import { Interpreter } from "./interpreter";
-import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ } from "./opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND } from "./opCodes";
 
 test(`Test PUSH`, () => {
     expect(new Interpreter().runCode([PUSH, 2, STOP])).toBe(2);
@@ -34,4 +34,11 @@ test(`Test GT`, () => {
 test(`Test EQ`, () => {
     expect(new Interpreter().runCode([PUSH, 6, PUSH, 3, EQ, STOP])).toBe(0);
     expect(new Interpreter().runCode([PUSH, 3, PUSH, 3, EQ, STOP])).toBe(1);
+});
+
+test(`Test AND`, () => {
+    expect(new Interpreter().runCode([PUSH, 1, PUSH, 1, AND, STOP])).toBe(1);
+    expect(new Interpreter().runCode([PUSH, 1, PUSH, 0, AND, STOP])).toBe(0);
+    expect(new Interpreter().runCode([PUSH, 0, PUSH, 1, AND, STOP])).toBe(0);
+    expect(new Interpreter().runCode([PUSH, 0, PUSH, 0, AND, STOP])).toBe(0);
 });
