@@ -1,4 +1,4 @@
-import { PUSH, ADD, SUB, MUL, DIV, STOP } from "./opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP, LT } from "./opCodes";
 
 export class Interpreter {
 
@@ -10,7 +10,8 @@ export class Interpreter {
         [SUB, this.handleSub],
         [MUL, this.handleMul],
         [DIV, this.handleDiv],
-        [STOP, this.handleStop]
+        [STOP, this.handleStop],
+        [LT, this.handleLt]
     ]);
     
     constructor() {
@@ -75,5 +76,11 @@ export class Interpreter {
     private handleStop() {
         console.log(`STOP`);
         this.state.programCounter = this.state.code.length;
+    }
+
+    private handleLt() {
+        const {a, b} = this.getValues();
+        console.log(`LT ${a} < ${b} = ${a < b}`);
+        this.state.stack.push(a < b ? 1 : 0);
     }
 }
