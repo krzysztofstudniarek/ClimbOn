@@ -8,3 +8,4 @@ export const LT = 'LT';
 export const GT = 'GT';
 export const EQ = 'EQ';
 export const AND = 'AND';
+export const OR = 'OR';
