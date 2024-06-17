@@ -4,3 +4,4 @@ export const PUSH = 'PUSH';
 export const SUB = 'SUB';
 export const MUL = 'MUL';
 export const DIV = 'DIV';
+export const LT = 'LT';

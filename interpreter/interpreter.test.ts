@@ -1,5 +1,5 @@
 import { Interpreter } from "./interpreter";
-import { PUSH, ADD, SUB, MUL, DIV, STOP } from "./opCodes";
+import { PUSH, ADD, SUB, MUL, DIV, STOP, LT } from "./opCodes";
 
 test(`Test PUSH`, () => {
     expect(new Interpreter().runCode([PUSH, 2, STOP])).toBe(2);
@@ -19,4 +19,8 @@ test(`Test MUL`, () => {
 
 test(`Test DIV`, () => {
     expect(new Interpreter().runCode([PUSH, 3, PUSH, 6, DIV, STOP])).toBe(2);
+});
+
+test(`Test LT`, () => {
+    expect(new Interpreter().runCode([PUSH, 3, PUSH, 6, LT, STOP])).toBe(1);
 });
