@@ -1,7 +1,11 @@
-import { getValues } from "./opCodes";
+import { validateNumericAction } from "../validations/numeric";
+import { getValues, SUB } from "./opCodes";
 
 export const handleSub = (state: any) => {
     const {a, b} = getValues(state);
-    console.log(`SUB ${a} - ${b} = ${a - b}`);
+
+    validateNumericAction(a, b, SUB);
+
+    console.log(`${SUB} ${a} - ${b} = ${a - b}`);
     state.stack.push(a - b);
 }

@@ -45,10 +45,15 @@ export class Interpreter {
         this.state.code = code;
 
         while(this.state.programCounter < this.state.code.length) {
-            const opCode = this.state.code[this.state.programCounter];
-            (this.operations.get(opCode as string)!)(this.state);
+            try{
+                const opCode = this.state.code[this.state.programCounter];
+                (this.operations.get(opCode as string)!)(this.state);
 
-            this.state.programCounter++;
+                this.state.programCounter++;
+            } catch(e) {
+                console.log(`Error: ${e}`);
+                return e;
+            }
         }
 
         return this.state.stack[this.state.stack.length - 1];

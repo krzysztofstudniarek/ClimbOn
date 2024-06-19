@@ -1,7 +1,11 @@
-import { getValues } from "./opCodes";
+import { validateNumericAction } from "../validations/numeric";
+import { DIV, getValues } from "./opCodes";
 
 export const handleDiv = (state: any) => {
     const {a, b} = getValues(state);
-    console.log(`DIC ${a} / ${b} = ${a / b}`);
+
+    validateNumericAction(a, b, DIV);
+
+    console.log(`${DIV} ${a} / ${b} = ${a / b}`);
     state.stack.push(a / b);
 }

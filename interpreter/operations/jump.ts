@@ -1,5 +1,10 @@
+import { validateJump } from "../validations/jump";
+
 export const handleJump = (state: any) => {
     const destination = state.stack.pop();
+
+    validateJump(state, destination);
+
     state.programCounter = (destination - 1);
 }
 
