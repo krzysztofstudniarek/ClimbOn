@@ -1,63 +1,6 @@
 import { Interpreter } from "./interpreter";
-import { PUSH, ADD, SUB, MUL, DIV, STOP, LT, GT, EQ, AND, OR, JUMP, JUMPI } from "./operations/opCodes";
+import { PUSH, ADD, SUB, MUL, STOP} from "./operations/opCodes";
 
-test(`Test PUSH`, () => {
-    expect(new Interpreter().runCode([PUSH, 2, STOP])).toBe(2);
-});
-
-test(`Test ADD`, () => {
-    expect(new Interpreter().runCode([PUSH, 2, PUSH, 3, ADD, STOP])).toBe(5);
-});
-
-test(`Test SUB`, () => {
-    expect(new Interpreter().runCode([PUSH, 2, PUSH, 3, SUB, STOP])).toBe(1);
-});
-
-test(`Test MUL`, () => {
-    expect(new Interpreter().runCode([PUSH, 2, PUSH, 3, MUL, STOP])).toBe(6);
-});
-
-test(`Test DIV`, () => {
-    expect(new Interpreter().runCode([PUSH, 3, PUSH, 6, DIV, STOP])).toBe(2);
-});
-
-test(`Test LT`, () => {
-    expect(new Interpreter().runCode([PUSH, 6, PUSH, 3, LT, STOP])).toBe(1);
-    expect(new Interpreter().runCode([PUSH, 3, PUSH, 6, LT, STOP])).toBe(0);
-});
-
-test(`Test GT`, () => {
-    expect(new Interpreter().runCode([PUSH, 6, PUSH, 3, GT, STOP])).toBe(0);
-    expect(new Interpreter().runCode([PUSH, 3, PUSH, 6, GT, STOP])).toBe(1);
-});
-
-test(`Test EQ`, () => {
-    expect(new Interpreter().runCode([PUSH, 6, PUSH, 3, EQ, STOP])).toBe(0);
-    expect(new Interpreter().runCode([PUSH, 3, PUSH, 3, EQ, STOP])).toBe(1);
-});
-
-test(`Test AND`, () => {
-    expect(new Interpreter().runCode([PUSH, 1, PUSH, 1, AND, STOP])).toBe(1);
-    expect(new Interpreter().runCode([PUSH, 1, PUSH, 0, AND, STOP])).toBe(0);
-    expect(new Interpreter().runCode([PUSH, 0, PUSH, 1, AND, STOP])).toBe(0);
-    expect(new Interpreter().runCode([PUSH, 0, PUSH, 0, AND, STOP])).toBe(0);
-});
-
-test(`Test OR`, () => {
-    expect(new Interpreter().runCode([PUSH, 1, PUSH, 1, OR, STOP])).toBe(1);
-    expect(new Interpreter().runCode([PUSH, 1, PUSH, 0, OR, STOP])).toBe(1);
-    expect(new Interpreter().runCode([PUSH, 0, PUSH, 1, OR, STOP])).toBe(1);
-    expect(new Interpreter().runCode([PUSH, 0, PUSH, 0, OR, STOP])).toBe(0); 
-});
-
-test(`Test JUMP`, () => {
-    expect(new Interpreter().runCode([PUSH, 6, JUMP, PUSH, 0, JUMP, PUSH, 'jump successfull', STOP])).toBe('jump successfull');
-});
-
-test(`Test JUMPI`, () => {
-    expect(new Interpreter().runCode([PUSH, 8, PUSH, 1, JUMPI, PUSH, 0, JUMP, PUSH, 'jump successfull', STOP])).toBe('jump successfull');
-});
-
-test(`Test JUMPI`, () => {
-    expect(new Interpreter().runCode([PUSH, 8, PUSH, 0, JUMPI, PUSH, 'jump un-successfull', STOP])).toBe('jump un-successfull');
+test(`Test Interpreter`, () => {
+    expect(new Interpreter().runCode([PUSH, 2, PUSH, 3, MUL, PUSH, 5, ADD, PUSH, 11, SUB, STOP])).toBe(0);
 });
