@@ -10,7 +10,7 @@ test(`Test Interpreter Errors`, () => {
     expect(() => new Interpreter().runCode([PUSH, 5, PUSH, "ala ma kota", DIV, STOP])).toThrow("requires two numbers");
     expect(() => new Interpreter().runCode([PUSH])).toThrow("PUSH can't be last operation in the code");
     expect(() => new Interpreter().runCode([PUSH, 0, PUSH, 5, DIV, STOP])).toThrow("Division by zero");
-    expect(() => new Interpreter().runCode([PUSH, 0, PUSH, 5, AND, STOP])).toThrow("");
+    expect(() => new Interpreter().runCode([PUSH, 0, PUSH, 5, AND, STOP])).toThrow("AND requires only 0 or 1 numbers");
 });
 
 test(`Test Interpreter execution limit`, () => {
