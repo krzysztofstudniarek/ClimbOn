@@ -1,6 +1,7 @@
 {
   "scripts": {
     "run-interpreter": "ts-node index.ts",
+    "rub-blockchain": "ts-node blockchain.ts",
     "test": "jest",
     "lint": "eslint --fix --ext .js,.ts"
   },
