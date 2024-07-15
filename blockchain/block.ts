@@ -1,4 +1,4 @@
-import { BlockHeaders, GENESIS_DATA } from '../config';
+import { BlockHeaders, GENESIS_DATA, MINE_RATE } from '../config';
 import { keccakHash } from '../utils/charactersUtils';
 
 
@@ -21,18 +21,26 @@ export class Block {
         return value.length > HASH_LENGTH ? MAX_HASH: '0'.repeat(HASH_LENGTH - value.length) + value;
     }
 
+    static adjustDifficulty({lastBlock, timestamp}: {lastBlock: Block, timestamp: number}) {
+        const { difficulty } = lastBlock.blockHeaders;
+        if( timestamp - lastBlock.blockHeaders.timestamp > MINE_RATE) {
+            return difficulty - 1;
+        }
+
+        return difficulty + 1;
+    }
+
     static mineBlock({ lastBlock, beneficiary }: {lastBlock: Block, beneficiary: string}) {
         const target = Block.calculateBlockTargetHash({ lastBlock });
 
         let timestamp, truncatedBlockHeaders, header, nonce, underTargetHash;
 
         do {
-        
             timestamp = Date.now();
             truncatedBlockHeaders = {
                 parentHash: keccakHash(lastBlock.blockHeaders),
                 beneficiary,
-                difficulty: lastBlock.blockHeaders.difficulty + 1,
+                difficulty: Block.adjustDifficulty({lastBlock, timestamp}),
                 number: lastBlock.blockHeaders.number + 1,
                 timestamp,
             }

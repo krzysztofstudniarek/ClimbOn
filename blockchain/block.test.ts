@@ -42,7 +42,17 @@ test(`Test mine block function`, () => {
         beneficiary: 'foo'
     });
     const newTargetHash = keccakHash(newBlock.blockHeaders);
-    
+
     expect(newBlock).toBeDefined();
     expect(newTargetHash < target).toBeTruthy();
+});
+
+test(`Test difficulty adjustments for longer than mine time`, () => {
+    expect(Block.adjustDifficulty({lastBlock: Block.genesis(), timestamp: Date.now()})).toBe(0)
+});
+
+test(`Test difficulty adjustments for shorter than mine time`, () => {
+    const lastBlock = Block.genesis();
+    lastBlock.blockHeaders.timestamp = Date.now();
+    expect(Block.adjustDifficulty({lastBlock, timestamp: Date.now()})).toBe(2)
 });

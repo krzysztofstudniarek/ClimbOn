@@ -17,3 +17,7 @@ export const GENESIS_DATA = {
         nonce: 0,
     }
 };
+
+export const MILLISECONDS = 1;
+export const SECONDS = 1000 * MILLISECONDS;
+export const MINE_RATE = 13 * SECONDS;
