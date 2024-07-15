@@ -1,8 +1,11 @@
 import { BlockHeaders, GENESIS_DATA } from '../config';
+import { keccakHash } from '../utils/charactersUtils';
+
 
 const HASH_LENGTH = 64;
 const MAX_HASH = 'f'.repeat(HASH_LENGTH);
 const MAX_HASH_VALUE = parseInt(MAX_HASH, 16);
+const MAX_NONCE_VALUE = 2**64;
 
 export class Block {
     blockHeaders: BlockHeaders;
@@ -19,7 +22,33 @@ export class Block {
     }
 
     static mineBlock({ lastBlock, beneficiary }: {lastBlock: Block, beneficiary: string}) {
+        const target = Block.calculateBlockTargetHash({ lastBlock });
+
+        let timestamp, truncatedBlockHeaders, header, nonce, underTargetHash;
+
+        do {
         
+            timestamp = Date.now();
+            truncatedBlockHeaders = {
+                parentHash: keccakHash(lastBlock.blockHeaders),
+                beneficiary,
+                difficulty: lastBlock.blockHeaders.difficulty + 1,
+                number: lastBlock.blockHeaders.number + 1,
+                timestamp,
+            }
+
+            header = keccakHash(truncatedBlockHeaders);
+            nonce = Math.floor(Math.random() * MAX_NONCE_VALUE);
+
+            underTargetHash = keccakHash(header+nonce);
+        } while( underTargetHash > target )
+
+        return new this({
+            blockHeaders: {
+                ...truncatedBlockHeaders, 
+                nonce
+            }
+        });
     }
 
     static genesis() {

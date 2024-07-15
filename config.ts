@@ -3,7 +3,7 @@ export type BlockHeaders = {
     beneficiary: string;
     difficulty: number;
     number: number;
-    timestamp: string;
+    timestamp: number;
     nonce: number;
 };
 
@@ -13,7 +13,7 @@ export const GENESIS_DATA = {
         beneficiary: '--genesis-beneficiary--',
         difficulty: 1,
         number: 0,  
-        timestamp: '--genesis-timestamp--',
+        timestamp: 0,
         nonce: 0,
     }
 };

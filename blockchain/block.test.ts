@@ -1,3 +1,4 @@
+import { keccakHash } from "../utils/charactersUtils";
 import { Block } from "./block";
 
 test(`Test Target Block Hash Calculation When Difficulty is 1`, () => {
@@ -12,7 +13,7 @@ test(`Test Target Block Hash Calculation When Difficulty is 100`, () => {
                 beneficiary: '--test-beneficiary--',
                 difficulty: 100,
                 number: 0,  
-                timestamp: '--test-timestamp--',
+                timestamp: 0,
                 nonce: 0,
             }
         })
@@ -27,9 +28,21 @@ test(`Test Target Block Hash Calculation When Difficulty is MAX_HASH_VALUE`, () 
                 beneficiary: '--test-beneficiary--',
                 difficulty: parseInt('f'.repeat(64),16),
                 number: 0,  
-                timestamp: '--test-timestamp--',
+                timestamp: 0,
                 nonce: 0,
             }
         })
     })).toBe('0000000000000000000000000000000000000000000000000000000000000001');
+});
+
+test(`Test mine block function`, () => {
+    const target = Block.calculateBlockTargetHash({lastBlock: Block.genesis()});
+    const newBlock = Block.mineBlock({
+        lastBlock: Block.genesis(),
+        beneficiary: 'foo'
+    });
+    const newTargetHash = keccakHash(newBlock.blockHeaders);
+    
+    expect(newBlock).toBeDefined();
+    expect(newTargetHash < target).toBeTruthy();
 });

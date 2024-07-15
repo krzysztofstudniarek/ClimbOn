@@ -1,9 +1,9 @@
-import { PUSH, ADD, SUB, MUL, DIV, STOP } from "./interpreter/operations/opCodes";
-import { Interpreter} from "./interpreter/interpreter";
+import { Block } from "./blockchain/block";
 
-const code = [PUSH, 2, PUSH, 3, MUL, PUSH, 5, ADD, PUSH, 11, SUB, STOP]; //expected res 0
-new Interpreter().runCode(code);
+const block = Block.mineBlock({
+    lastBlock: Block.genesis(),
+    beneficiary: 'foo'
+});
 
 
-const code2 = [PUSH, 2, PUSH, 3, MUL, PUSH, 6, DIV, STOP]; //expected res 1
-new Interpreter().runCode(code2);
+console.log(`block = ${JSON.stringify(block)}`);
