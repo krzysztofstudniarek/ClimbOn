@@ -1,9 +1,13 @@
 import { Block } from './block';
 
-class Blockchain {
+export class Blockchain {
     chain: Block[];
 
     constructor()   {
         this.chain = [Block.genesis()];
+    }
+
+    addBlock({ block }: { block: Block }) {
+        this.chain.push(block);
     }
 }

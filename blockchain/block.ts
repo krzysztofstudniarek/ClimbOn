@@ -24,10 +24,10 @@ export class Block {
     static adjustDifficulty({lastBlock, timestamp}: {lastBlock: Block, timestamp: number}) {
         const { difficulty } = lastBlock.blockHeaders;
         if( timestamp - lastBlock.blockHeaders.timestamp > MINE_RATE) {
-            return difficulty - 1;
+            return difficulty <= 1 ? 1 : difficulty - 1;
         }
 
-        return difficulty + 1;
+        return difficulty < 1 ? 1 : difficulty + 1;
     }
 
     static mineBlock({ lastBlock, beneficiary }: {lastBlock: Block, beneficiary: string}) {

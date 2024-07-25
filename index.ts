@@ -1,9 +1,14 @@
-import { Block } from "./blockchain/block";
+import { Blockchain } from './blockchain/blockchain';
+import { Block } from './blockchain/block';
 
-const block = Block.mineBlock({
-    lastBlock: Block.genesis(),
-    beneficiary: 'foo'
-});
+const blockchain = new Blockchain();
 
 
-console.log(`block = ${JSON.stringify(block)}`);
+
+for (let i = 0; i<1000000; i++) {
+    const lastBlock = blockchain.chain[blockchain.chain.length - 1];
+    const block = Block.mineBlock({lastBlock, beneficiary: 'foo'});
+    blockchain.addBlock({block});
+    console.log(block);
+}
+
