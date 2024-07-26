@@ -4,7 +4,7 @@ export type BlockHeaders = {
     difficulty: number;
     number: number;
     timestamp: number;
-    nonce: number;
+    nonce: number | undefined;
 };
 
 export const GENESIS_DATA = {
