@@ -15,9 +15,7 @@ export class Blockchain {
             }).then(() => {
                 this.chain.push(block);
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            });
+            }).catch(reject);
         });
     }
 }
